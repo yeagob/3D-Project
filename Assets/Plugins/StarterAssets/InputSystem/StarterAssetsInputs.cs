@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -11,6 +12,7 @@ namespace StarterAssets
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
+		public bool crouch;
 		public bool sprint;
 
 		[Header("Movement Settings")]
@@ -38,6 +40,11 @@ namespace StarterAssets
 		{
 			JumpInput(value.isPressed);
 		}
+		public void OnCrouch(InputValue value)
+		{
+			CrouchInput(value.isPressed);
+		}
+
 
 		public void OnSprint(InputValue value)
 		{
@@ -65,7 +72,13 @@ namespace StarterAssets
 		{
 			sprint = newSprintState;
 		}
-		
+
+
+		private void CrouchInput(bool isPressed)
+		{
+			crouch = !crouch;
+		}
+
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
